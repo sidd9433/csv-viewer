@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {User} from './User';
+import {User} from './model/User';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,7 @@ import {User} from './User';
 export class AppComponent {
   title = 'csv-viewer';
   public records: any[] = [];
+  searchTerm: string;
 
   static validate(file: any) {
     return file.name.endsWith('.csv');
