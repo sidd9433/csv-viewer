@@ -18,20 +18,17 @@
 </nav>
 
 <div class="content" role="main">
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-    <span>
-      <p>
+  <div class="card" style="width: 40rem;">
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-muted">
+        <p>
         Upload csv record file in <b>CSV</b> format. There are two requirements:
-      </p>
+        </p>
+      </h6>
       <ul class="pl-4 mb-0">
         <li>View the results on screen.</li>
         <li>Filter the results based on minimal issue count.</li>
       </ul>
-    </span>
-    <span>&nbsp;&nbsp;</span>
-    <span>
       <div class="statement-select text-center">
         <label class="btn btn-danger mt-4"
                for="file-select">
@@ -45,18 +42,18 @@
                (change)="parseCsv($event)">
 
       </div>
-    </span>
+    </div>
   </div>
 
+  <br>
 
-
-  <div *ngIf="records.length > 0">
+  <div *ngIf="records.length > 0" style="width: 40rem;">
 
     <div class="form-group">
-      <input type="text" class="form-controll" placeholder="Filter by Issue Count" [(ngModel)]="searchTerm"/>
+      <input type="text" class="form-control" placeholder="Filter by Issue Count" [(ngModel)]="searchTerm"/>
     </div>
 
-    <table class="table" >
+    <table class="table">
       <thead class="thead-dark">
       <tr>
         <th>First Name </th>

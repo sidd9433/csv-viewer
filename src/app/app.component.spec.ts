@@ -1,11 +1,19 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { IssueCountFilterPipe } from './pipe/issuecount-filter.pipe';
+import { FormsModule } from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        IssueCountFilterPipe
+      ],
+      imports: [
+        BrowserModule,
+        FormsModule
       ],
     }).compileComponents();
   }));
@@ -26,6 +34,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('csv-viewer app is running!');
+    expect(compiled.querySelector('.container a h5').textContent).toContain(' Csv Viewer ');
   });
 });
