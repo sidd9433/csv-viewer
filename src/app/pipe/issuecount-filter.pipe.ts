@@ -6,11 +6,10 @@ import {User} from '../model/User';
 })
 export class IssueCountFilterPipe implements PipeTransform {
 
-  transform(users: User[], searchTerm: number): User[] {
+  transform(users: User[], searchTerm: string): User[] {
     if (!users || !searchTerm) {
       return users;
     }
-    // tslint:disable-next-line:triple-equals
-    return users.filter(user => user.issueCount.valueOf() == searchTerm);
+    return users.filter(user => user.issueCount.toString() === searchTerm);
   }
 }
