@@ -53,7 +53,7 @@ export class AppComponent {
   getLoadCallback(evt: any, fileReader: FileReader): () => void {
     return () => {
       const data = (fileReader.result as string).split(/\r\n|\n/);
-      const headers = (data[0] as string).split(',');
+      const headers = data[0].split(',');
       this.records = AppComponent.getUsers(data, headers.length);
     };
   }
