@@ -8,28 +8,18 @@ import {User} from './model/User';
 })
 export class AppComponent {
   title = 'csv-viewer';
-  public records: any[] = [];
+  records: any[] = [];
   searchTerm: string;
 
   static validate(file: any) {
     return file.name.endsWith('.csv');
   }
 
-  static getHeaders(csvRecordsArr: any) {
-    const headers = (csvRecordsArr[0] as string).split(',');
-    const headerArray = [];
-    for (const header of headers) {
-      headerArray.push(header);
-    }
-    return headerArray;
-  }
-
-
-  static getUsers(csvRecordsArray: any, headerLength: any) {
+  static getUsers(data: any, headerLength: any) {
     const users = [];
 
-    for (let i = 1; i < csvRecordsArray.length; i++) {
-      const record = (csvRecordsArray[i] as string).split(',');
+    for (let i = 1; i < data.length; i++) {
+      const record = (data[i] as string).split(',');
       if (record.length === headerLength) {
         const user: User = new User();
         user.firstName = record[0].trim().replace(/"/g, '');
@@ -43,30 +33,28 @@ export class AppComponent {
   }
 
   parseCsv($event: any): void {
-
-    const text = [];
-    const files = $event.srcElement.files;
-
-    if (AppComponent.validate(files[0])) {
-
+    if (AppComponent.validate($event.target.files[0])) {
       const input = $event.target;
       const reader = new FileReader();
       reader.readAsText(input.files[0]);
 
-      reader.onload = () => {
-        const data = (reader.result as string).split(/\r\n|\n/);
-
-        const headers = AppComponent.getHeaders(data);
-        this.records = AppComponent.getUsers(data, headers.length);
-      };
+      reader.onload = this.getLoadCallback($event, reader);
 
       reader.onerror = () => {
-        console.log('error is occurred while reading file!');
+        console.log('Could not read the file');
       };
 
     } else {
-      alert('Please import valid .csv file.');
-      // this.fileReset();
+      alert('Only .csv file is allowed');
+      this.records = [];
     }
+  }
+
+  getLoadCallback(evt: any, fileReader: FileReader): () => void {
+    return () => {
+      const data = (fileReader.result as string).split(/\r\n|\n/);
+      const headers = (data[0] as string).split(',');
+      this.records = AppComponent.getUsers(data, headers.length);
+    };
   }
 }

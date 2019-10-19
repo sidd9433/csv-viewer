@@ -55,20 +55,20 @@
 
     <table class="table">
       <thead class="thead-dark">
-      <tr>
-        <th>First Name </th>
-        <th>Sur Name </th>
-        <th>Issue Count </th>
-        <th>Date of Birth </th>
-      </tr>
+        <tr>
+          <th>First Name </th>
+          <th>Sur Name </th>
+          <th>Issue Count </th>
+          <th>Date of Birth </th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let record of records | issueCountFilter: searchTerm">
-        <td> <span>{{record.firstName}}</span> </td>
-        <td> <span>{{record.surName}}</span> </td>
-        <td> <span>{{record.issueCount}}</span> </td>
-        <td> <span>{{record.dob | date: 'dd-MMM-yyyy'}}</span> </td>
-      </tr>
+        <tr *ngFor="let record of records | issueCountFilter: searchTerm">
+          <td> <span>{{record.firstName}}</span> </td>
+          <td> <span>{{record.surName}}</span> </td>
+          <td> <span>{{record.issueCount}}</span> </td>
+          <td> <span>{{record.dob | date: 'dd-MMM-yyyy'}}</span> </td>
+        </tr>
       </tbody>
     </table>
   </div>
